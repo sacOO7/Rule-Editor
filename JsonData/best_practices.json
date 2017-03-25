@@ -1,0 +1,282 @@
+[
+  {
+    "RuleName": "accessor-pairs",
+    "Details": "enforce getter and setter pairs in objects"
+  },
+  {
+    "RuleName": "no-self-assign",
+    "Details": "disallow assignments where both sides are exactly the same"
+  },
+  {
+    "RuleName": "no-restricted-properties",
+    "Details": "disallow certain properties on certain objects"
+  },
+  {
+    "RuleName": "no-return-assign",
+    "Details": "disallow assignment operators in return statements"
+  },
+  {
+    "RuleName": "no-unused-expressions",
+    "Details": "disallow unused expressions"
+  },
+  {
+    "RuleName": "no-new-wrappers",
+    "Details": "disallow new operators with the String, Number, and Boolean objects"
+  },
+  {
+    "RuleName": "no-eval",
+    "Details": "disallow the use of eval()"
+  },
+  {
+    "RuleName": "wrap-iife",
+    "Details": "require parentheses around immediate function invocations"
+  },
+  {
+    "RuleName": "no-case-declarations",
+    "Details": "disallow lexical declarations in case clauses"
+  },
+  {
+    "RuleName": "no-new-func",
+    "Details": "disallow new operators with the Function object"
+  },
+  {
+    "RuleName": "no-useless-escape",
+    "Details": "disallow unnecessary escape characters"
+  },
+  {
+    "RuleName": "no-script-url",
+    "Details": "disallow javascript: urls"
+  },
+  {
+    "RuleName": "no-empty-pattern",
+    "Details": "disallow empty destructuring patterns"
+  },
+  {
+    "RuleName": "no-useless-return",
+    "Details": "disallow redundant return statements"
+  },
+  {
+    "RuleName": "eqeqeq",
+    "Details": "require the use of === and !=="
+  },
+  {
+    "RuleName": "no-multi-spaces",
+    "Details": "disallow multiple spaces"
+  },
+  {
+    "RuleName": "consistent-return",
+    "Details": "require return statements to either always or never specify values"
+  },
+  {
+    "RuleName": "no-throw-literal",
+    "Details": "disallow throwing literals as exceptions"
+  },
+  {
+    "RuleName": "dot-location",
+    "Details": "enforce consistent newlines before and after dots"
+  },
+  {
+    "RuleName": "no-global-assign",
+    "Details": "disallow assignments to native objects or read-only global variables"
+  },
+  {
+    "RuleName": "vars-on-top",
+    "Details": "require var declarations be placed at the top of their containing scope"
+  },
+  {
+    "RuleName": "radix",
+    "Details": "enforce the consistent use of the radix argument when using parseInt()"
+  },
+  {
+    "RuleName": "no-floating-decimal",
+    "Details": "disallow leading or trailing decimal points in numeric literals"
+  },
+  {
+    "RuleName": "require-await",
+    "Details": "disallow async functions which have no await expression"
+  },
+  {
+    "RuleName": "block-scoped-var",
+    "Details": "enforce the use of variables within the scope they are defined"
+  },
+  {
+    "RuleName": "no-new",
+    "Details": "disallow new operators outside of assignments or comparisons"
+  },
+  {
+    "RuleName": "array-callback-return",
+    "Details": "enforce return statements in callbacks of array methods"
+  },
+  {
+    "RuleName": "no-redeclare",
+    "Details": "disallow variable redeclaration"
+  },
+  {
+    "RuleName": "no-magic-numbers",
+    "Details": "disallow magic numbers"
+  },
+  {
+    "RuleName": "no-octal-escape",
+    "Details": "disallow octal escape sequences in string literals"
+  },
+  {
+    "RuleName": "no-implicit-coercion",
+    "Details": "disallow shorthand type conversions"
+  },
+  {
+    "RuleName": "no-empty-function",
+    "Details": "disallow empty functions"
+  },
+  {
+    "RuleName": "no-loop-func",
+    "Details": "disallow function declarations and expressions inside loop statements"
+  },
+  {
+    "RuleName": "no-labels",
+    "Details": "disallow labeled statements"
+  },
+  {
+    "RuleName": "dot-notation",
+    "Details": "enforce dot notation whenever possible"
+  },
+  {
+    "RuleName": "default-case",
+    "Details": "require default cases in switch statements"
+  },
+  {
+    "RuleName": "no-with",
+    "Details": "disallow with statements"
+  },
+  {
+    "RuleName": "no-implied-eval",
+    "Details": "disallow the use of eval()-like methods"
+  },
+  {
+    "RuleName": "no-implicit-globals",
+    "Details": "disallow variable and function declarations in the global scope"
+  },
+  {
+    "RuleName": "no-iterator",
+    "Details": "disallow the use of the __iterator__ property"
+  },
+  {
+    "RuleName": "no-extend-native",
+    "Details": "disallow extending native types"
+  },
+  {
+    "RuleName": "no-self-compare",
+    "Details": "disallow comparisons where both sides are exactly the same"
+  },
+  {
+    "RuleName": "no-unmodified-loop-condition",
+    "Details": "disallow unmodified loop conditions"
+  },
+  {
+    "RuleName": "no-eq-null",
+    "Details": "disallow null comparisons without type-checking operators"
+  },
+  {
+    "RuleName": "complexity",
+    "Details": "enforce a maximum cyclomatic complexity allowed in a program"
+  },
+  {
+    "RuleName": "no-useless-concat",
+    "Details": "disallow unnecessary concatenation of literals or template literals"
+  },
+  {
+    "RuleName": "no-warning-comments",
+    "Details": "disallow specified warning terms in comments"
+  },
+  {
+    "RuleName": "no-extra-bind",
+    "Details": "disallow unnecessary calls to .bind()"
+  },
+  {
+    "RuleName": "curly",
+    "Details": "enforce consistent brace style for all control statements"
+  },
+  {
+    "RuleName": "no-lone-blocks",
+    "Details": "disallow unnecessary nested blocks"
+  },
+  {
+    "RuleName": "guard-for-in",
+    "Details": "require for-in loops to include an if statement"
+  },
+  {
+    "RuleName": "no-fallthrough",
+    "Details": "disallow fallthrough of case statements"
+  },
+  {
+    "RuleName": "prefer-promise-reject-errors",
+    "Details": "require using Error objects as Promise rejection reasons"
+  },
+  {
+    "RuleName": "no-caller",
+    "Details": "disallow the use of arguments.caller or arguments.callee"
+  },
+  {
+    "RuleName": "no-alert",
+    "Details": "disallow the use of alert, confirm, and prompt"
+  },
+  {
+    "RuleName": "no-invalid-this",
+    "Details": "disallow this keywords outside of classes or class-like objects"
+  },
+  {
+    "RuleName": "no-return-await",
+    "Details": "disallow unnecessary return await"
+  },
+  {
+    "RuleName": "no-useless-call",
+    "Details": "disallow unnecessary calls to .call() and .apply()"
+  },
+  {
+    "RuleName": "no-void",
+    "Details": "disallow void operators"
+  },
+  {
+    "RuleName": "no-extra-label",
+    "Details": "disallow unnecessary labels"
+  },
+  {
+    "RuleName": "no-else-return",
+    "Details": "disallow else blocks after return statements in if statements"
+  },
+  {
+    "RuleName": "no-proto",
+    "Details": "disallow the use of the __proto__ property"
+  },
+  {
+    "RuleName": "no-unused-labels",
+    "Details": "disallow unused labels"
+  },
+  {
+    "RuleName": "no-multi-str",
+    "Details": "disallow multiline strings"
+  },
+  {
+    "RuleName": "no-sequences",
+    "Details": "disallow comma operators"
+  },
+  {
+    "RuleName": "no-octal",
+    "Details": "disallow octal literals"
+  },
+  {
+    "RuleName": "no-param-reassign",
+    "Details": "disallow reassigning function parameters"
+  },
+  {
+    "RuleName": "class-methods-use-this",
+    "Details": "enforce that class methods utilize this"
+  },
+  {
+    "RuleName": "yoda",
+    "Details": "require or disallow “Yoda” conditions"
+  },
+  {
+    "RuleName": "no-div-regex",
+    "Details": "disallow division operators explicitly at the beginning of regular expressions"
+  }
+]

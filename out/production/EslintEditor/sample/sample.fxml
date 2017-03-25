@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorroot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+
+        <JFXTreeTableView fx:id="jfxtable" layoutX="14.0" layoutY="61.0" prefHeight="451.0" prefWidth="1010.0" />
+      <JFXCheckBox fx:id="Default" layoutX="12.0" layoutY="25.0" />
+      <Label fx:id="defaultlab" layoutX="60.0" layoutY="18.0" prefHeight="31.0" prefWidth="105.0" text="Use Default">
+         <font>
+            <Font name="Droid Sans Georgian" size="16.0" />
+         </font></Label>
+      <Label layoutX="732.0" layoutY="18.0" prefHeight="31.0" prefWidth="46.0" text="Error">
+         <font>
+            <Font name="Droid Sans Georgian" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="845.0" layoutY="18.0" prefHeight="31.0" prefWidth="72.0" text="Warning">
+         <font>
+            <Font name="Droid Sans Georgian" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="974.0" layoutY="18.0" prefHeight="31.0" prefWidth="37.0" text="Off">
+         <font>
+            <Font name="Droid Sans Georgian" size="16.0" />
+         </font>
+      </Label>
+      <JFXCheckBox fx:id="off" layoutX="927.0" layoutY="25.0" />
+      <JFXCheckBox fx:id="warning" checkedColor="#bdd015" layoutX="796.0" layoutY="25.0" unCheckedColor="#bdd015" />
+      <JFXCheckBox fx:id="error" checkedColor="#cf2d2d" layoutX="679.0" layoutY="25.0" unCheckedColor="#cf2d2d" />
+      <JFXButton fx:id="previous" buttonType="RAISED" layoutX="632.0" layoutY="525.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Previous" visible="false" />
+      <JFXButton fx:id="skip" buttonType="RAISED" layoutX="726.0" layoutY="524.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Skip" />
+      <JFXButton fx:id="next" buttonType="RAISED" layoutX="828.0" layoutY="525.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Next" />
+      <JFXButton fx:id="finish" buttonType="RAISED" layoutX="930.0" layoutY="526.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Finish" />
+      <JFXButton fx:id="importRules" buttonType="RAISED" layoutX="43.0" layoutY="526.0" prefHeight="25.0" prefWidth="116.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Import Rules" />
+
+    </children>
+</AnchorPane>

@@ -1,0 +1,130 @@
+[
+  {
+    "RuleName": "no-await-in-loop",
+    "Details": "disallow await inside of loops"
+  },
+  {
+    "RuleName": "no-unsafe-negation",
+    "Details": "disallow negating the left operand of relational operators"
+  },
+  {
+    "RuleName": "no-compare-neg-zero",
+    "Details": "disallow comparing against -0"
+  },
+  {
+    "RuleName": "no-irregular-whitespace",
+    "Details": "disallow irregular whitespace outside of strings and comments"
+  },
+  {
+    "RuleName": "no-console",
+    "Details": "disallow the use of console"
+  },
+  {
+    "RuleName": "no-unexpected-multiline",
+    "Details": "disallow confusing multiline expressions"
+  },
+  {
+    "RuleName": "no-ex-assign",
+    "Details": "disallow reassigning exceptions in catch clauses"
+  },
+  {
+    "RuleName": "no-control-regex",
+    "Details": "disallow control characters in regular expressions"
+  },
+  {
+    "RuleName": "no-unreachable",
+    "Details": "disallow unreachable code after return, throw, continue, and break statements"
+  },
+  {
+    "RuleName": "no-extra-semi",
+    "Details": "disallow unnecessary semicolons"
+  },
+  {
+    "RuleName": "no-empty-character-class",
+    "Details": "disallow empty character classes in regular expressions"
+  },
+  {
+    "RuleName": "no-sparse-arrays",
+    "Details": "disallow sparse arrays"
+  },
+  {
+    "RuleName": "no-cond-assign",
+    "Details": "disallow assignment operators in conditional expressions"
+  },
+  {
+    "RuleName": "valid-jsdoc",
+    "Details": "enforce valid JSDoc comments"
+  },
+  {
+    "RuleName": "no-constant-condition",
+    "Details": "disallow constant expressions in conditions"
+  },
+  {
+    "RuleName": "use-isnan",
+    "Details": "require calls to isNaN() when checking for NaN"
+  },
+  {
+    "RuleName": "no-template-curly-in-string",
+    "Details": "disallow template literal placeholder syntax in regular strings"
+  },
+  {
+    "RuleName": "no-invalid-regexp",
+    "Details": "disallow invalid regular expression strings in RegExp constructors"
+  },
+  {
+    "RuleName": "no-dupe-keys",
+    "Details": "disallow duplicate keys in object literals"
+  },
+  {
+    "RuleName": "no-extra-boolean-cast",
+    "Details": "disallow unnecessary boolean casts"
+  },
+  {
+    "RuleName": "no-regex-spaces",
+    "Details": "disallow multiple spaces in regular expressions"
+  },
+  {
+    "RuleName": "no-obj-calls",
+    "Details": "disallow calling global object properties as functions"
+  },
+  {
+    "RuleName": "no-prototype-builtins",
+    "Details": "disallow calling some Object.prototype methods directly on objects"
+  },
+  {
+    "RuleName": "no-inner-declarations",
+    "Details": "disallow variable or function declarations in nested blocks"
+  },
+  {
+    "RuleName": "no-func-assign",
+    "Details": "disallow reassigning function declarations"
+  },
+  {
+    "RuleName": "no-unsafe-finally",
+    "Details": "disallow control flow statements in finally blocks"
+  },
+  {
+    "RuleName": "no-debugger",
+    "Details": "disallow the use of debugger"
+  },
+  {
+    "RuleName": "valid-typeof",
+    "Details": "enforce comparing typeof expressions against valid strings"
+  },
+  {
+    "RuleName": "no-empty",
+    "Details": "disallow empty block statements"
+  },
+  {
+    "RuleName": "no-dupe-args",
+    "Details": "disallow duplicate arguments in function definitions"
+  },
+  {
+    "RuleName": "no-extra-parens",
+    "Details": "disallow unnecessary parentheses"
+  },
+  {
+    "RuleName": "no-duplicate-case",
+    "Details": "disallow duplicate case labels"
+  }
+]

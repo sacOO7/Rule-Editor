@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="163.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXCheckBox layoutX="14.0" layoutY="17.0" unCheckedColor="#cf2d2d" />
+      <JFXCheckBox layoutX="63.0" layoutY="17.0" unCheckedColor="#bdd015" />
+      <JFXCheckBox layoutX="109.0" layoutY="17.0" />
+   </children>
+</AnchorPane>

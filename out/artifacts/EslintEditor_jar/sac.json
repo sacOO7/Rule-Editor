@@ -1,0 +1,26 @@
+{
+    "rules": {
+        "no-unsafe-finally": "error",
+        "no-unsafe-negation": "warn",
+        "no-unexpected-multiline": "warn",
+        "no-useless-concat": "warn",
+        "no-control-regex": "warn",
+        "no-sequences": "warn",
+        "no-debugger": "off",
+        "no-void": "error",
+        "no-cond-assign": "error",
+        "no-constant-condition": "error",
+        "prefer-promise-reject-errors": "error",
+        "no-compare-neg-zero": "off",
+        "no-console": "off",
+        "radix": "warn",
+        "no-useless-escape": "error",
+        "no-useless-return": "warn",
+        "no-throw-literal": "warn",
+        "no-with": "warn",
+        "no-await-in-loop": "warn",
+        "no-dupe-args": "error",
+        "no-useless-call": "error"
+    },
+    "env": {"browser": true}
+}
