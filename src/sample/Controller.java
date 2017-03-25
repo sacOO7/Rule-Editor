@@ -2,8 +2,6 @@ package sample;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.corba.se.impl.naming.cosnaming.NamingUtils;
-import com.sun.deploy.security.ruleset.Rule;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -28,7 +26,6 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -76,16 +73,14 @@ public class Controller implements Initializable {
         finalData=new JSONObject();
     }
 
-//    public void useDefault(){
-//        ObservableList <RuleModel> observableList= lists.get(pageNumber);
-//        for (int i=0;i<observableList.size();i++){
-//            if (finalData.opt(observableList.get(i).getName())==null) {
-//                recordedData.put(observableList.get(i).getName(), "None");
-//            }else{
-//                recordedData.put(observableList.get(i).getName(), finalData.optString(observableList.get(i).getName()));
-//            }
-//        }
-//    }
+    public void useDefault(){
+        ObservableList <RuleModel> observableList= lists.get(pageNumber);
+        for (int i=0;i<observableList.size();i++){
+            if (observableList.get(i).getRecommended()){
+                recordedData.put(observableList.get(i).getName(),"error");
+            }
+        }
+    }
 
     public void processImport(){
         Iterator <?> keys=importObject.keys();
@@ -105,6 +100,8 @@ public class Controller implements Initializable {
             }
         }
     }
+
+
 
 
     public JSONArray getJSONArray(String filename){
@@ -276,6 +273,15 @@ public class Controller implements Initializable {
             }
         });
 
+        Default.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                  useDefault();
+                  jfxtable.setRoot(null);
+                  jfxtable.setRoot(root);
+            }
+        });
+
         error.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -424,6 +430,7 @@ public class Controller implements Initializable {
         error.setSelected(false);
         warning.setSelected(false);
         off.setSelected(false);
+        Default.setSelected(false);
     }
 
     public void setAllRule(String value){
