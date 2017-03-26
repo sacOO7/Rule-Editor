@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +42,7 @@ public class Controller implements Initializable {
     public JFXTreeTableView jfxtable;
     public JFXCheckBox Default;
     public Label defaultlab;
+    public JFXTextField search;
 
     //CheckedData on the page
     JSONObject recordedData;
@@ -51,6 +53,7 @@ public class Controller implements Initializable {
 
     //Imported Object
     JSONObject importObject;
+    public static final String[] name={"Possible Javascript Errors","Best Javascript Practices","Javascript Variables","Stylistic Javascript"};
     public static final String [] path={ "possibleerrors.json","BestPractices.json","variables.json","stylistic.json"};
     //Parent Checkboxes
     public JFXCheckBox error,warning,off;
@@ -63,6 +66,7 @@ public class Controller implements Initializable {
     ArrayList<ObservableList<RuleModel>> lists=new ArrayList<>();
     //Tree root
     private RecursiveTreeItem<RuleModel> root;
+    private JFXTreeTableColumn ruleMode;
 
     public void setPrimary_stage(Stage primary_stage) {
         this.primary_stage = primary_stage;
@@ -78,6 +82,8 @@ public class Controller implements Initializable {
         for (int i=0;i<observableList.size();i++){
             if (observableList.get(i).getRecommended()){
                 recordedData.put(observableList.get(i).getName(),"error");
+            }else{
+                recordedData.put(observableList.get(i).getName(),"None");
             }
         }
     }
@@ -150,6 +156,7 @@ public class Controller implements Initializable {
 
         getObservableList();
         recordData();
+        search.setPromptText("Search Rules for "+name[pageNumber]);
 //        System.out.println("Size is "+PossibleErrorsobservableList.size());
 //        System.out.println(PossibleErrorsobservableList.get(0).getName());
         root= new RecursiveTreeItem<>(lists.get(pageNumber), RecursiveTreeObject::getChildren);
@@ -167,6 +174,7 @@ public class Controller implements Initializable {
             public void handle(MouseEvent event) {
                 if (pageNumber<=2) {
                     pageNumber++;
+                    search.setPromptText("Search Rules for "+name[pageNumber]);
                     if (pageNumber>=1){
                         previous.setVisible(true);
                     }else {
@@ -188,11 +196,29 @@ public class Controller implements Initializable {
             }
         });
 
+        search.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                ObservableList <RuleModel> parentList=lists.get(pageNumber);
+                ObservableList <RuleModel> childList=FXCollections.observableArrayList();
+                for (RuleModel child :parentList){
+                    if (child.getName().toLowerCase().contains(newValue.toLowerCase())){
+                        childList.add(child);
+                    }
+                }
+                root = new RecursiveTreeItem<>(childList, RecursiveTreeObject::getChildren);
+
+                jfxtable.setRoot(null);
+                jfxtable.setRoot(root);
+            }
+        });
+
         skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (pageNumber<=2) {
                     pageNumber++;
+                    search.setPromptText("Search Rules for "+name[pageNumber]);
                     if (pageNumber>=1){
                         previous.setVisible(true);
                     }else {
@@ -218,6 +244,7 @@ public class Controller implements Initializable {
 
                 if (pageNumber>=1) {
                     pageNumber--;
+                    search.setPromptText("Search Rules for "+name[pageNumber]);
                     if (pageNumber>=1){
                         previous.setVisible(true);
                     }else {
@@ -276,9 +303,16 @@ public class Controller implements Initializable {
         Default.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                  useDefault();
-                  jfxtable.setRoot(null);
-                  jfxtable.setRoot(root);
+                if (Default.isSelected()) {
+                    error.setSelected(false);
+                    warning.setSelected(false);
+                    off.setSelected(false);
+                    useDefault();
+                }else{
+                    setAllRule("None");
+                }
+                jfxtable.setRoot(null);
+                jfxtable.setRoot(root);
             }
         });
 
@@ -287,6 +321,7 @@ public class Controller implements Initializable {
             public void handle(MouseEvent event) {
                 warning.setSelected(false);
                 off.setSelected(false);
+                Default.setSelected(false);
                 jfxtable.refresh();
                 if (error.isSelected()){
                     setAllRule("error");
@@ -301,6 +336,7 @@ public class Controller implements Initializable {
             public void handle(MouseEvent event) {
                 error.setSelected(false);
                 off.setSelected(false);
+                Default.setSelected(false);
                 jfxtable.refresh();
                 if (warning.isSelected()) {
                     setAllRule("warn");
@@ -315,6 +351,8 @@ public class Controller implements Initializable {
             public void handle(MouseEvent event) {
                 error.setSelected(false);
                 warning.setSelected(false);
+                Default.setSelected(false);
+
                 jfxtable.refresh();
                 if (off.isSelected()) {
                     setAllRule("off");
@@ -359,22 +397,22 @@ public class Controller implements Initializable {
             else return Description.getComputedValue(param);
         });
 
-        JFXTreeTableColumn ruleMode=new JFXTreeTableColumn<>("Rule Mode");
+        ruleMode=new JFXTreeTableColumn<>("Rule Mode");
         ruleMode.setMinWidth(250);
 
         ruleMode.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<RuleModel,Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue call(TreeTableColumn.CellDataFeatures <RuleModel,Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
+                return new SimpleBooleanProperty(param.getValue().getValue() != null);
             }
         });
 
-        ruleMode.setCellFactory(new Callback<TreeTableColumn, TreeTableCell>() {
 
+        ruleMode.setCellFactory(new Callback<TreeTableColumn, TreeTableCell>() {
             int i=-1;
             @Override
             public TreeTableCell call(TreeTableColumn param) {
-                if (i>=lists.get(pageNumber).size()){
+                if (i>=root.getChildren().size()+1){
                     i=-1;
                 }
                 return new CheckBoxesCell(i++);
@@ -586,6 +624,8 @@ public class Controller implements Initializable {
                     }
                 }
                 setGraphic(pane);
+            }else{
+                setGraphic(null);
             }
         }
     }

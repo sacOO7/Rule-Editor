@@ -41,6 +41,11 @@
       <JFXButton fx:id="next" buttonType="RAISED" layoutX="828.0" layoutY="525.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Next" />
       <JFXButton fx:id="finish" buttonType="RAISED" layoutX="930.0" layoutY="526.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Finish" />
       <JFXButton fx:id="importRules" buttonType="RAISED" layoutX="43.0" layoutY="526.0" prefHeight="25.0" prefWidth="116.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Import Rules" />
+      <JFXTextField focusColor="SLATEGRAY" fx:id="search" layoutX="211.0" layoutY="17.0" maxWidth="375.0" minWidth="356.0" prefHeight="31.0" prefWidth="375.0" promptText="Search Rule" >
+          <font>
+              <Font name="Droid Sans" size="18.0" />
+          </font>
+      </JFXTextField>
 
     </children>
 </AnchorPane>
