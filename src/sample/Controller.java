@@ -118,7 +118,7 @@ public class Controller implements Initializable {
             if (observableList.get(i).getRecommended()){
                 recordedData.put(observableList.get(i).getName(),"error");
             }else{
-                recordedData.put(observableList.get(i).getName(),"None");
+                recordedData.put(observableList.get(i).getName(),"off");
             }
         }
     }
@@ -140,8 +140,12 @@ public class Controller implements Initializable {
                 }else {
                     recordedData.put(observableList.get(i).getName(), "0");
                 }
-            }else{
-                recordedData.put(observableList.get(i).getName(), finalData.optString(observableList.get(i).getName()));
+            }else {
+                if (pageNumber == path.length - 1) {
+                    recordedData.put(observableList.get(i).getName(), finalData.opt(observableList.get(i).getName()).toString());
+                } else {
+                    recordedData.put(observableList.get(i).getName(), finalData.optString(observableList.get(i).getName()));
+                }
             }
         }
     }
@@ -173,6 +177,10 @@ public class Controller implements Initializable {
             ObservableList <RuleModel> observableList=FXCollections.observableArrayList();
             JSONArray rules = getJSONArray(path[i]);
             for (int j = 0; j < rules.length(); j++) {
+                if (i==path.length-1){
+                    String name="angular/"+rules.getJSONObject(j).optString("Name");
+                    rules.getJSONObject(j).put("Name",name);
+                }
                 RuleModel rule = new RuleModel(rules.getJSONObject(j));
                 observableList.add(rule);
             }
@@ -344,9 +352,10 @@ public class Controller implements Initializable {
                         errorlabel.setVisible(true);
                         warninglabel.setVisible(true);
                         offlabel.setVisible(true);
+                        saveAngularData();
+                    }else {
+                        saveData();
                     }
-
-                    saveData();
                     setAllParentCheckBoxFalse();
                     recordedData=new JSONObject();
                     recordData();
@@ -359,7 +368,11 @@ public class Controller implements Initializable {
         finish.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                saveData();
+                if (pageNumber<=3) {
+                    saveData();
+                }else {
+                    saveAngularData();
+                }
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -513,6 +526,22 @@ public class Controller implements Initializable {
         jfxtable.setRoot(root);
     }
 
+    private void saveAngularData() {
+        Iterator <?> keys=recordedData.keys();
+        while (keys.hasNext()){
+            String key= (String) keys.next();
+            if (!recordedData.opt(key).equals("None")){
+                if (recordedData.optString(key).startsWith("[")){
+                    finalData.put(key, new JSONArray(recordedData.optString(key)));
+                }else {
+                    finalData.put(key, Long.valueOf(recordedData.optString(key)));
+                }
+            }else{
+                finalData.remove(key);
+            }
+        }
+    }
+
     private void useAngularDefault() {
         ObservableList <RuleModel> observableList= lists.get(pageNumber);
         for (int i=0;i<observableList.size();i++){
@@ -637,6 +666,8 @@ public class Controller implements Initializable {
             off.setLayoutX(109);
 
             off.setStyle("-fx-alignment: center ;");
+            off.setCheckedColor(Color.BLACK);
+
             pane.setStyle("-fx-alignment: top-center;");
 
             error.setOnMouseClicked(new EventHandler<MouseEvent>() {

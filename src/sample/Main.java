@@ -40,6 +40,7 @@ public class Main extends Application {
         JSONObject env=new JSONObject();
         env.put("browser",true);
         parent.put("env",env);
+        parent.put("plugins",new JSONArray("[\"angular\"]"));
         return parent;
     }
 
@@ -50,10 +51,6 @@ public class Main extends Application {
         return extended;
     }
 
-    public static JSONArray getAngularPlugin(){
-        JSONArray array=new JSONArray("angular");
-        return array;
-    }
 
     public static JSONObject getfileRuleObject(String filename){
         String total="";

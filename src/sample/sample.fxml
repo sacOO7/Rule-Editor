@@ -29,7 +29,7 @@
             <Font name="Droid Sans Georgian" size="16.0" />
          </font>
       </Label>
-      <JFXCheckBox fx:id="off" layoutX="927.0" layoutY="25.0" />
+      <JFXCheckBox fx:id="off" layoutX="927.0" layoutY="25.0" checkedColor="black"/>
       <JFXCheckBox fx:id="warning" checkedColor="#bdd015" layoutX="796.0" layoutY="25.0" unCheckedColor="#bdd015" />
       <JFXCheckBox fx:id="error" checkedColor="#cf2d2d" layoutX="679.0" layoutY="25.0" unCheckedColor="#cf2d2d" />
       <JFXButton fx:id="previous" buttonType="RAISED" layoutX="632.0" layoutY="525.0" prefHeight="25.0" prefWidth="87.0" ripplerFill="slategray" style="-fx-background-color: #e0e0e0" text="Previous" visible="false" />
