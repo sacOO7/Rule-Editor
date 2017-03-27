@@ -8,8 +8,10 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.*;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -40,11 +42,17 @@ public class Main extends Application {
         parent.put("env",env);
         return parent;
     }
+
     public static JSONArray getExtendedObject(){
         JSONArray extended= new JSONArray();
         extended.put("angular");
         extended.put("eslint:recommended");
         return extended;
+    }
+
+    public static JSONArray getAngularPlugin(){
+        JSONArray array=new JSONArray("angular");
+        return array;
     }
 
     public static JSONObject getfileRuleObject(String filename){

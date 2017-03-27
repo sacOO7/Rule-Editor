@@ -12,15 +12,21 @@ public class RuleModel extends RecursiveTreeObject<RuleModel> {
     StringProperty name;
     StringProperty description;
     Boolean Recommended;
+    StringProperty value;
     Boolean Fixable;
     StringProperty link;
+
+
 
     RuleModel(JSONObject object){
         name=new SimpleStringProperty(object.optString("Name"));
         description=new SimpleStringProperty(object.optString("Desc"));
         Fixable=object.optBoolean("Fixable");
         Recommended=object.optBoolean("Recommended");
-        link=new SimpleStringProperty(object.getString("Link"));
+        link=new SimpleStringProperty(object.optString("Link"));
+        if (object.opt("Value")!=null){
+            value=new SimpleStringProperty(object.opt("Value").toString());
+        }
     }
 
     public String getName() {
@@ -73,5 +79,17 @@ public class RuleModel extends RecursiveTreeObject<RuleModel> {
 
     public void setLink(String link) {
         this.link.set(link);
+    }
+
+    public String getValue() {
+        return value.get();
+    }
+
+    public StringProperty valueProperty() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value.set(value);
     }
 }

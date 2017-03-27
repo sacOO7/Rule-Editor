@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="anchorroot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
@@ -18,17 +14,17 @@
          <font>
             <Font name="Droid Sans Georgian" size="16.0" />
          </font></Label>
-      <Label layoutX="732.0" layoutY="18.0" prefHeight="31.0" prefWidth="46.0" text="Error">
+      <Label layoutX="732.0" layoutY="18.0" prefHeight="31.0" prefWidth="46.0" text="Error" fx:id="errorlabel">
          <font>
             <Font name="Droid Sans Georgian" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="845.0" layoutY="18.0" prefHeight="31.0" prefWidth="72.0" text="Warning">
+      <Label layoutX="845.0" layoutY="18.0" prefHeight="31.0" prefWidth="72.0" text="Warning" fx:id="warninglabel">
          <font>
             <Font name="Droid Sans Georgian" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="974.0" layoutY="18.0" prefHeight="31.0" prefWidth="37.0" text="Off">
+      <Label layoutX="974.0" layoutY="18.0" prefHeight="31.0" prefWidth="37.0" text="Off" fx:id="offlabel">
          <font>
             <Font name="Droid Sans Georgian" size="16.0" />
          </font>

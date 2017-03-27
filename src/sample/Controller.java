@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -41,7 +43,7 @@ public class Controller implements Initializable {
     private Stage primary_stage;
     public JFXTreeTableView jfxtable;
     public JFXCheckBox Default;
-    public Label defaultlab;
+    public Label defaultlab,errorlabel,warninglabel,offlabel;
     public JFXTextField search;
 
     //CheckedData on the page
@@ -53,8 +55,8 @@ public class Controller implements Initializable {
 
     //Imported Object
     JSONObject importObject;
-    public static final String[] name={"Possible Javascript Errors","Best Javascript Practices","Javascript Variables","Stylistic Javascript"};
-    public static final String [] path={ "possibleerrors.json","BestPractices.json","variables.json","stylistic.json"};
+    public static final String[] name={"Possible Javascript Errors","Best Javascript Practices","Javascript Variables","Stylistic Javascript","Angular js"};
+    public static final String [] path={ "possibleerrors.json","BestPractices.json","variables.json","stylistic.json","angular.json"};
     //Parent Checkboxes
     public JFXCheckBox error,warning,off;
 
@@ -67,6 +69,10 @@ public class Controller implements Initializable {
     //Tree root
     private RecursiveTreeItem<RuleModel> root;
     private JFXTreeTableColumn ruleMode;
+    private Callback<TreeTableColumn.CellDataFeatures<RuleModel, Boolean>, ObservableValue<Boolean>> checkboxfactory;
+    private Callback<TreeTableColumn, TreeTableCell> checkboxvaluefactory;
+    private Callback<TreeTableColumn, TreeTableCell> textboxfactory;
+
 
     public void setPrimary_stage(Stage primary_stage) {
         this.primary_stage = primary_stage;
@@ -75,6 +81,35 @@ public class Controller implements Initializable {
     public void initializeJSONObjects(){
         recordedData=new JSONObject();
         finalData=new JSONObject();
+
+        checkboxfactory=new Callback<TreeTableColumn.CellDataFeatures<RuleModel,Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue call(TreeTableColumn.CellDataFeatures <RuleModel,Boolean> param) {
+                return new SimpleBooleanProperty(param.getValue().getValue() != null);
+            }
+        };
+
+        checkboxvaluefactory=new Callback<TreeTableColumn, TreeTableCell>() {
+            int i=-1;
+            @Override
+            public TreeTableCell call(TreeTableColumn param) {
+                if (i>=root.getChildren().size()){
+                    i=-1;
+                }
+                return new CheckBoxesCell(i++);
+            }
+        };
+
+        textboxfactory=new Callback<TreeTableColumn, TreeTableCell>() {
+            int i=0;
+            @Override
+            public TreeTableCell call(TreeTableColumn param) {
+                if (i>=root.getChildren().size()){
+                    i=0;
+                }
+                return new TextFieldCell(i++);
+            }
+        };
     }
 
     public void useDefault(){
@@ -100,7 +135,11 @@ public class Controller implements Initializable {
         ObservableList <RuleModel> observableList= lists.get(pageNumber);
         for (int i=0;i<observableList.size();i++){
             if (finalData.opt(observableList.get(i).getName())==null) {
-                recordedData.put(observableList.get(i).getName(), "None");
+                if (pageNumber<=3) {
+                    recordedData.put(observableList.get(i).getName(), "None");
+                }else {
+                    recordedData.put(observableList.get(i).getName(), "0");
+                }
             }else{
                 recordedData.put(observableList.get(i).getName(), finalData.optString(observableList.get(i).getName()));
             }
@@ -172,7 +211,8 @@ public class Controller implements Initializable {
         next.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (pageNumber<=2) {
+                if (pageNumber<=3) {
+                    search.setText("");
                     pageNumber++;
                     search.setPromptText("Search Rules for "+name[pageNumber]);
                     if (pageNumber>=1){
@@ -180,12 +220,27 @@ public class Controller implements Initializable {
                     }else {
                         previous.setVisible(false);
                     }
-                    if (pageNumber>2){
+                    if (pageNumber>3){
                         next.setVisible(false);
+                        ruleMode.setCellFactory(new Callback<TreeTableColumn, TreeTableCell>() {
+                            int i=0;
+                            @Override
+                            public TreeTableCell call(TreeTableColumn param) {
+                                if (i>=root.getChildren().size()){
+                                    i=0;
+                                }
+                                return new TextFieldCell(i++);
+                            }
+                        });
+                        errorlabel.setVisible(false);
+                        warninglabel.setVisible(false);
+                        offlabel.setVisible(false);
+                        error.setVisible(false);
+                        warning.setVisible(false);
+                        off.setVisible(false);
                     }
 
                     saveData();
-
                     setAllParentCheckBoxFalse();
                     recordedData=new JSONObject();
                     recordData();
@@ -216,7 +271,8 @@ public class Controller implements Initializable {
         skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (pageNumber<=2) {
+                if (pageNumber<=3) {
+                    search.setText("");
                     pageNumber++;
                     search.setPromptText("Search Rules for "+name[pageNumber]);
                     if (pageNumber>=1){
@@ -224,8 +280,25 @@ public class Controller implements Initializable {
                     }else {
                         previous.setVisible(false);
                     }
-                    if (pageNumber>2){
+                    if (pageNumber>3){
                         next.setVisible(false);
+                        ruleMode.setCellFactory(new Callback<TreeTableColumn, TreeTableCell>() {
+                            int i=0;
+                            @Override
+                            public TreeTableCell call(TreeTableColumn param) {
+                                if (i>=root.getChildren().size()){
+                                    i=0;
+                                }
+                                return new TextFieldCell(i++);
+                            }
+                        });
+
+                        error.setVisible(false);
+                        warning.setVisible(false);
+                        off.setVisible(false);
+                        errorlabel.setVisible(false);
+                        warninglabel.setVisible(false);
+                        offlabel.setVisible(false);
                     }
 
                     setAllParentCheckBoxFalse();
@@ -243,6 +316,7 @@ public class Controller implements Initializable {
             public void handle(MouseEvent event) {
 
                 if (pageNumber>=1) {
+                    search.setText("");
                     pageNumber--;
                     search.setPromptText("Search Rules for "+name[pageNumber]);
                     if (pageNumber>=1){
@@ -250,8 +324,26 @@ public class Controller implements Initializable {
                     }else {
                         previous.setVisible(false);
                     }
-                    if (pageNumber<=2){
+                    if (pageNumber==3){
+                        System.out.println("Got called");
                         next.setVisible(true);
+                        ruleMode.setCellFactory(new Callback<TreeTableColumn, TreeTableCell>() {
+                            int i=0;
+                            @Override
+                            public TreeTableCell call(TreeTableColumn param) {
+                                if (i>=root.getChildren().size()){
+                                    i=0;
+                                }
+                                return new CheckBoxesCell(i++);
+                            }
+                        });
+
+                        error.setVisible(true);
+                        warning.setVisible(true);
+                        off.setVisible(true);
+                        errorlabel.setVisible(true);
+                        warninglabel.setVisible(true);
+                        offlabel.setVisible(true);
                     }
 
                     saveData();
@@ -303,13 +395,22 @@ public class Controller implements Initializable {
         Default.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (Default.isSelected()) {
-                    error.setSelected(false);
-                    warning.setSelected(false);
-                    off.setSelected(false);
-                    useDefault();
+                if (pageNumber<=3) {
+                    if (Default.isSelected()) {
+                        error.setSelected(false);
+                        warning.setSelected(false);
+                        off.setSelected(false);
+                        useDefault();
+                    } else {
+                        setAllRule("None");
+                    }
+
                 }else{
-                    setAllRule("None");
+                    if (Default.isSelected()){
+                        useAngularDefault();
+                    }else {
+                        setAllRule("0");
+                    }
                 }
                 jfxtable.setRoot(null);
                 jfxtable.setRoot(root);
@@ -400,30 +501,23 @@ public class Controller implements Initializable {
         ruleMode=new JFXTreeTableColumn<>("Rule Mode");
         ruleMode.setMinWidth(250);
 
-        ruleMode.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<RuleModel,Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue call(TreeTableColumn.CellDataFeatures <RuleModel,Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue().getValue() != null);
-            }
-        });
+        ruleMode.setCellValueFactory(checkboxfactory);
 
 
-        ruleMode.setCellFactory(new Callback<TreeTableColumn, TreeTableCell>() {
-            int i=-1;
-            @Override
-            public TreeTableCell call(TreeTableColumn param) {
-                if (i>=root.getChildren().size()+1){
-                    i=-1;
-                }
-                return new CheckBoxesCell(i++);
-            }
-        });
+        ruleMode.setCellFactory(checkboxvaluefactory);
 
         jfxtable.setRoot(null);
         jfxtable.setShowRoot(false);
         jfxtable.setEditable(false);
         jfxtable.getColumns().setAll(ruleName,Description,ruleMode);
         jfxtable.setRoot(root);
+    }
+
+    private void useAngularDefault() {
+        ObservableList <RuleModel> observableList= lists.get(pageNumber);
+        for (int i=0;i<observableList.size();i++){
+                recordedData.put(observableList.get(i).getName(),observableList.get(i).getValue());
+        }
     }
 
     private File openfile(){
@@ -458,12 +552,12 @@ public class Controller implements Initializable {
             String key= (String) keys.next();
             if (!recordedData.opt(key).equals("None")){
                 finalData.put(key,recordedData.opt(key));
-                System.out.println();
             }else{
                 finalData.remove(key);
             }
         }
     }
+
     public void setAllParentCheckBoxFalse(){
         error.setSelected(false);
         warning.setSelected(false);
@@ -624,7 +718,48 @@ public class Controller implements Initializable {
                     }
                 }
                 setGraphic(pane);
-            }else{
+                }else{
+                setGraphic(null);
+            }
+        }
+    }
+
+    private class TextFieldCell extends TreeTableCell {
+
+        JFXTextField field=new JFXTextField();
+
+        TextFieldCell(int i){
+            RuleModel model=lists.get(pageNumber).get(i);
+//            System.out.println("value is "+value);
+            field.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    if (getParent()!=null) {
+                        String name = ((RuleModel) ((TreeTableRow) getParent()).getItem()).getName();
+                        recordedData.put(name, newValue);
+                    }
+                }
+            });
+            field.setText(recordedData.getString(model.getName()));
+            field.setFocusColor(Color.SLATEGREY);
+            field.setStyle("-fx-font-size: 12;-fx-font-family: Droid Sans;-fx-alignment: center;-fx-text-alignment: center;");
+        }
+
+        @Override
+        protected void updateItem(Object item, boolean empty) {
+            super.updateItem(item, empty);
+            if (!empty){
+                setGraphic(field);
+                if (getParent() != null) {
+                    try {
+                        String name = ((RuleModel) ((TreeTableRow) getParent()).getItem()).getName();
+                        field.setText(recordedData.getString(name));
+                    }catch (Exception e){
+
+                    }
+                }
+
+            }else {
                 setGraphic(null);
             }
         }
