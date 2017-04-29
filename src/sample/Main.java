@@ -8,18 +8,20 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Paths;
 
 public class Main extends Application {
 
-    public static String rootPath="NewJSON/";
+    public static String rootPath;
     public static String filename;
     public static ClassLoader loader;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        rootPath=Paths.get("").toAbsolutePath().toString()+ File.separator+"JSON"+File.separator;
+        System.out.println("Path is "+rootPath);
         ClassLoader classLoader = getClass().getClassLoader();
         Main.loader=classLoader;
 

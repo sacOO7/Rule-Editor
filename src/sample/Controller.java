@@ -155,8 +155,8 @@ public class Controller implements Initializable {
 
     public JSONArray getJSONArray(String filename){
         String line="";
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(Main.rootPath+filename)))) {
-
+//        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(Main.rootPath+filename)))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(new File(Main.rootPath+filename)))) {
             String sCurrentLine;
 
             while ((sCurrentLine = br.readLine()) != null) {
@@ -192,6 +192,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeJSONObjects();
+
 
         if (Main.filename!=null){
             if (Main.getfileRuleObject(Main.filename).opt("rules")!=null) {
